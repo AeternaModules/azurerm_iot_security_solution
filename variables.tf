@@ -52,10 +52,10 @@ EOT
     query_for_resources        = optional(string)
     query_subscription_ids     = optional(set(string))
     tags                       = optional(map(string))
-    additional_workspace = optional(object({
+    additional_workspace = optional(list(object({
       data_types   = set(string)
       workspace_id = string
-    }))
+    })))
     recommendations_enabled = optional(object({
       acr_authentication               = optional(bool) # Default: true
       agent_send_unutilized_msg        = optional(bool) # Default: true
@@ -75,22 +75,6 @@ EOT
       vulnerable_tls_cipher_suite      = optional(bool) # Default: true
     }))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.iot_security_solutions : (
-        length(v.display_name) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.iot_security_solutions : (
-        v.query_subscription_ids == null || (can(regex("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$", v.query_subscription_ids)))
-      )
-    ])
-    error_message = "must be a valid UUID"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_iot_security_solution's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -115,6 +99,9 @@ EOT
   #   source:    [from resourcegroups.ValidateName] !matched
   # path: location
   #   source:    location.EnhancedValidate: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
+  # path: display_name
+  #   condition: length(value) > 0
+  #   message:   must not be empty
   # path: iothub_ids[*]
   #   source:    [from iothubValidate.IotHubID] !ok
   # path: iothub_ids[*]
@@ -133,6 +120,9 @@ EOT
   #   source:    [from workspaces.ValidateWorkspaceID] err != nil
   # path: events_to_export[*]
   #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: query_subscription_ids[*]
+  #   condition: can(regex("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$", value))
+  #   message:   must be a valid UUID
   # path: tags
   #   condition: length(value) <= 50
   #   message:   [from tags.Validate: invalid when len(value) > 50]

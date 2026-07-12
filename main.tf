@@ -16,7 +16,7 @@ resource "azurerm_iot_security_solution" "iot_security_solutions" {
   tags                       = each.value.tags
 
   dynamic "additional_workspace" {
-    for_each = each.value.additional_workspace != null ? [each.value.additional_workspace] : []
+    for_each = each.value.additional_workspace != null ? each.value.additional_workspace : []
     content {
       data_types   = additional_workspace.value.data_types
       workspace_id = additional_workspace.value.workspace_id
