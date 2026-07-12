@@ -1,3 +1,7 @@
+output "iot_security_solutions_id" {
+  description = "Map of id values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
+  value       = { for k, v in azurerm_iot_security_solution.iot_security_solutions : k => v.id }
+}
 output "iot_security_solutions_additional_workspace" {
   description = "Map of additional_workspace values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
   value       = { for k, v in azurerm_iot_security_solution.iot_security_solutions : k => v.additional_workspace }
