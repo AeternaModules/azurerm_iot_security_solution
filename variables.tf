@@ -45,10 +45,10 @@ EOT
     name                       = string
     resource_group_name        = string
     disabled_data_sources      = optional(set(string))
-    enabled                    = optional(bool) # Default: true
+    enabled                    = optional(bool)
     events_to_export           = optional(set(string))
     log_analytics_workspace_id = optional(string)
-    log_unmasked_ips_enabled   = optional(bool) # Default: false
+    log_unmasked_ips_enabled   = optional(bool)
     query_for_resources        = optional(string)
     query_subscription_ids     = optional(set(string))
     tags                       = optional(map(string))
@@ -57,22 +57,22 @@ EOT
       workspace_id = string
     })))
     recommendations_enabled = optional(object({
-      acr_authentication               = optional(bool) # Default: true
-      agent_send_unutilized_msg        = optional(bool) # Default: true
-      baseline                         = optional(bool) # Default: true
-      edge_hub_mem_optimize            = optional(bool) # Default: true
-      edge_logging_option              = optional(bool) # Default: true
-      inconsistent_module_settings     = optional(bool) # Default: true
-      install_agent                    = optional(bool) # Default: true
-      ip_filter_deny_all               = optional(bool) # Default: true
-      ip_filter_permissive_rule        = optional(bool) # Default: true
-      open_ports                       = optional(bool) # Default: true
-      permissive_firewall_policy       = optional(bool) # Default: true
-      permissive_input_firewall_rules  = optional(bool) # Default: true
-      permissive_output_firewall_rules = optional(bool) # Default: true
-      privileged_docker_options        = optional(bool) # Default: true
-      shared_credentials               = optional(bool) # Default: true
-      vulnerable_tls_cipher_suite      = optional(bool) # Default: true
+      acr_authentication               = optional(bool)
+      agent_send_unutilized_msg        = optional(bool)
+      baseline                         = optional(bool)
+      edge_hub_mem_optimize            = optional(bool)
+      edge_logging_option              = optional(bool)
+      inconsistent_module_settings     = optional(bool)
+      install_agent                    = optional(bool)
+      ip_filter_deny_all               = optional(bool)
+      ip_filter_permissive_rule        = optional(bool)
+      open_ports                       = optional(bool)
+      permissive_firewall_policy       = optional(bool)
+      permissive_input_firewall_rules  = optional(bool)
+      permissive_output_firewall_rules = optional(bool)
+      privileged_docker_options        = optional(bool)
+      shared_credentials               = optional(bool)
+      vulnerable_tls_cipher_suite      = optional(bool)
     }))
   }))
   # --- Unconfirmed validation candidates, derived from azurerm_iot_security_solution's provider source ---
