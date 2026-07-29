@@ -19,7 +19,7 @@ Optional:
     - additional_workspace (block):
         - data_types (required)
         - workspace_id (required)
-    - recommendations_enabled (block):
+    - recommendations (block):
         - acr_authentication (optional)
         - agent_send_unutilized_msg (optional)
         - baseline (optional)
@@ -56,7 +56,7 @@ EOT
       data_types   = set(string)
       workspace_id = string
     })))
-    recommendations_enabled = optional(object({
+    recommendations = optional(object({
       acr_authentication               = optional(bool)
       agent_send_unutilized_msg        = optional(bool)
       baseline                         = optional(bool)

@@ -50,9 +50,9 @@ output "iot_security_solutions_query_subscription_ids" {
   description = "Map of query_subscription_ids values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
   value       = { for k, v in azurerm_iot_security_solution.iot_security_solutions : k => v.query_subscription_ids if v.query_subscription_ids != null && length(v.query_subscription_ids) > 0 }
 }
-output "iot_security_solutions_recommendations_enabled" {
-  description = "Map of recommendations_enabled values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
-  value       = { for k, v in azurerm_iot_security_solution.iot_security_solutions : k => v.recommendations_enabled if v.recommendations_enabled != null && length(v.recommendations_enabled) > 0 }
+output "iot_security_solutions_recommendations" {
+  description = "Map of recommendations values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
+  value       = { for k, v in azurerm_iot_security_solution.iot_security_solutions : k => v.recommendations if v.recommendations != null && length(v.recommendations) > 0 }
 }
 output "iot_security_solutions_resource_group_name" {
   description = "Map of resource_group_name values across all iot_security_solutions, keyed the same as var.iot_security_solutions"
